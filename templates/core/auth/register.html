@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register – Wikishelf</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+
+        body {
+            background-color: var(--bs-body-bg);
+            color: var(--bs-body-color);
+            font-family: 'Roboto Slab', serif;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg border-bottom bg-white">
+        <div class="container-fluid px-5">
+            <a class="navbar-brand fw-semibold" href="#">
+                <i class="bi bi-book-half text-dark fs-4"></i>
+                Wikishelf
+            </a>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-5 col-lg-4">
+
+                <div class="border rounded-3 bg-white p-4">
+                    <h5 class="mb-4">Create an account</h5>
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <!-- Username -->
+                        <div class="mb-3">
+                            <label class="form-label small text-secondary">Username</label>
+                            <div class="border rounded-3 bg-white p-2">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white border-0 text-secondary">
+                                        <i class="bi bi-person"></i>
+                                    </span>
+                                    <input type="text" name="username" class="form-control border-0 shadow-none py-1"
+                                        placeholder="Username" style="outline: none; box-shadow: none;"
+                                        value="{{ form.username.value|default:'' }}">
+                                </div>
+                            </div>
+                            {% if form.username.errors %}
+                                <div class="text-danger small mt-1">{{ form.username.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label class="form-label small text-secondary">Email</label>
+                            <div class="border rounded-3 bg-white p-2">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white border-0 text-secondary">
+                                        <i class="bi bi-envelope"></i>
+                                    </span>
+                                    <input type="email" name="email" class="form-control border-0 shadow-none py-1"
+                                        placeholder="Email address" style="outline: none; box-shadow: none;"
+                                        value="{{ form.email.value|default:'' }}">
+                                </div>
+                            </div>
+                            {% if form.email.errors %}
+                                <div class="text-danger small mt-1">{{ form.email.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label class="form-label small text-secondary">Password</label>
+                            <div class="border rounded-3 bg-white p-2">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white border-0 text-secondary">
+                                        <i class="bi bi-lock"></i>
+                                    </span>
+                                    <input type="password" name="password1" class="form-control border-0 shadow-none py-1"
+                                        placeholder="Password" style="outline: none; box-shadow: none;">
+                                </div>
+                            </div>
+                            {% if form.password1.errors %}
+                                <div class="text-danger small mt-1">{{ form.password1.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="mb-4">
+                            <label class="form-label small text-secondary">Confirm password</label>
+                            <div class="border rounded-3 bg-white p-2">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white border-0 text-secondary">
+                                        <i class="bi bi-lock-fill"></i>
+                                    </span>
+                                    <input type="password" name="password2" class="form-control border-0 shadow-none py-1"
+                                        placeholder="Confirm password" style="outline: none; box-shadow: none;">
+                                </div>
+                            </div>
+                            {% if form.password2.errors %}
+                                <div class="text-danger small mt-1">{{ form.password2.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <button type="submit" class="btn btn-dark w-100 rounded-3">Register</button>
+                    </form>
+
+                    <hr class="my-4">
+
+                    <p class="text-center small text-secondary mb-0">
+                        Already have an account?
+                        <a href="{% url 'login' %}" class="text-dark fw-semibold text-decoration-none">Log in</a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
